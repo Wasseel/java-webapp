@@ -1,0 +1,19 @@
+# Everything here is sent to the Docker daemon on every build unless excluded.
+# target/ alone is 22 MB, and .git only grows.
+.git
+.gitignore
+.gitattributes
+.mvn
+mvnw
+mvnw.cmd
+*.md
+chart
+argocd
+Jenkinsfile
+# Keep the jar itself — the Dockerfile copies it.
+target/classes
+target/test-classes
+target/maven-status
+target/surefire-reports
+target/generated-sources
+target/generated-test-sources

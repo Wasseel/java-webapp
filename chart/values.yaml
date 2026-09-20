@@ -1,0 +1,13 @@
+# Defaults. Each environment overrides what it needs in envs/<name>.yaml.
+replicaCount: 1
+
+image:
+  repository: java-webapp
+  tag: "v1"
+  # IfNotPresent: use the image already on the node.
+  # Always would send Kubernetes to Docker Hub, where this does not exist.
+  pullPolicy: IfNotPresent
+
+config:
+  greeting: "Hello"
+  environment: "dev"

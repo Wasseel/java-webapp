@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>java-webapp</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: system-ui, sans-serif; max-width: 34rem; margin: 4rem auto;
+           padding: 0 1.5rem; line-height: 1.6; }
+    h1 { font-size: 1.5rem; margin-bottom: .25rem; }
+    p.sub { color: #6b7280; margin-top: 0; }
+    button { font: inherit; padding: .5rem 1rem; border-radius: .375rem;
+             border: 1px solid #9ca3af; background: transparent; color: inherit;
+             cursor: pointer; margin-right: .5rem; }
+    button:hover { border-color: #2563eb; }
+    pre { background: rgba(127,127,127,.12); padding: 1rem; border-radius: .375rem;
+          overflow-x: auto; min-height: 3rem; }
+  </style>
+</head>
+<body>
+  <h1>java-webapp</h1>
+  <p class="sub">A small Spring Boot app, running in a container.</p>
+
+  <button onclick="call('/api/hello?name=Wasseel')">hello</button>
+  <button onclick="call('/api/time')">time</button>
+  <button onclick="call('/api/whoami')">whoami</button>
+
+  <pre id="out">Click a button.</pre>
+
+  <script>
+    async function call(path) {
+      const out = document.getElementById('out');
+      out.textContent = 'loading...';
+      try {
+        const res = await fetch(path);
+        out.textContent = JSON.stringify(await res.json(), null, 2);
+      } catch (e) {
+        out.textContent = 'Request failed: ' + e.message;
+      }
+    }
+  </script>
+</body>
+</html>

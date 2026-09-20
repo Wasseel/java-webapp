@@ -1,0 +1,6 @@
+replicaCount: 3
+image:
+  tag: "v1"
+config:
+  greeting: "Hello"
+  environment: "prod"
