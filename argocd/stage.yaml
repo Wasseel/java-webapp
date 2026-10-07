@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: java-webapp-stage
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Wasseel/java-webapp.git
+    targetRevision: main
+    path: chart
+    helm:
+      valueFiles:
+        - envs/stage.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: stage
+  # No syncPolicy block on purpose: stage only deploys when you click Sync,
+  # so promoting to it is a deliberate act rather than a side effect.

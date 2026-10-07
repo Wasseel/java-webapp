@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: java-webapp-qa
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Wasseel/java-webapp.git
+    targetRevision: main
+    path: chart
+    helm:
+      valueFiles:
+        - envs/qa.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: qa
+  # No syncPolicy block on purpose: qa only deploys when you click Sync,
+  # so promoting to it is a deliberate act rather than a side effect.

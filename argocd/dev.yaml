@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: java-webapp-dev
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Wasseel/java-webapp.git
+    targetRevision: main
+    path: chart
+    helm:
+      # Relative to path: above. ArgoCD refuses value files outside the
+      # chart folder, so ../envs/dev.yaml would never resolve.
+      valueFiles:
+        - envs/dev.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: dev
+  # Only dev deploys on its own. prune removes what git no longer declares;
+  # selfHeal reverts anything changed by hand in the cluster.
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
