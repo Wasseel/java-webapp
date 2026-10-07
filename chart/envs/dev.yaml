@@ -1,6 +1,6 @@
 replicaCount: 1
 image:
-  tag: "v6-8926aa1"
+  tag: "v7-51e3df7"
 config:
   greeting: "Hello"
   environment: "dev"
