@@ -16,7 +16,7 @@ public class HelloController {
 
     @GetMapping("/api/hello")
     public Map<String, String> hello(@RequestParam(defaultValue = "world") String name) {
-        return Map.of("message", "Hello, " + name + "!");
+        return Map.of("message", "Welcome, " + name + "!");
     }
 
     @GetMapping("/api/time")
