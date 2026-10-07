@@ -1,6 +1,6 @@
 replicaCount: 1
 image:
-  tag: "v1"
+  tag: "v9-02a4553"
 config:
   greeting: "Hello"
   environment: "qa"
