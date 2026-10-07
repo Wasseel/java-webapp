@@ -5,7 +5,11 @@ pipeline {
 
     environment {
         IMAGE    = 'java-webapp'
-        REGISTRY = 'registry:5000'          // container name: Jenkins is on the ci network
+        // localhost, not the container name. `docker` commands here are run by
+        // the HOST daemon through the mounted socket, not inside this
+        // container - so the ci network's names do not resolve. The registry
+        // publishes 5000 to the host, and Docker trusts localhost over HTTP.
+        REGISTRY = 'localhost:5000'
         VALUES   = 'chart/envs/dev.yaml'
         REPO     = 'github.com/Wasseel/java-webapp.git'
         NODES    = 'desktop-control-plane desktop-worker desktop-worker2'
