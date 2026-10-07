@@ -21,14 +21,14 @@ class HelloControllerTest {
     void greetsByName() throws Exception {
         mvc.perform(get("/api/hello?name=Wasseel"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.message").value("Hello, Wasseel!"));
+                .andExpect(jsonPath("$.message").value("Welcome, Wasseel!"));
     }
 
     @Test
     void greetsTheWorldByDefault() throws Exception {
         mvc.perform(get("/api/hello"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.message").value("Hello, world!"));
+                .andExpect(jsonPath("$.message").value("Welcome, world!"));
     }
 
     @Test
