@@ -63,11 +63,15 @@ pipeline {
         }
 
         // "scan steps (sonarqube)"
+        // The plugin is named in full rather than as `sonar:sonar`, because
+        // Maven only resolves that short prefix if org.sonarsource.scanner.maven
+        // is in its plugin groups - it is not, by default. The version is pinned
+        // to one that works with SonarQube 9.9 LTS.
         stage('Scan') {
             when { expression { env.SKIP != 'true' } }
             steps {
                 withSonarQubeEnv('sonarqube') {
-                    sh './mvnw -B sonar:sonar -Dsonar.projectKey=java-webapp'
+                    sh './mvnw -B org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.1.2184:sonar -Dsonar.projectKey=java-webapp'
                 }
             }
         }
